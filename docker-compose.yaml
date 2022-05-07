@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    node:
+        build:
+            context: .
+            dockerfile: nodejs.dockerfile
+        ports:
+            - 80:8080
+        volumes:
+            - ./nodeserver:/home/node/app
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
