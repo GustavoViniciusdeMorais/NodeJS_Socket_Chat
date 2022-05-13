@@ -31,6 +31,13 @@ io.on("connection", (client) => {
         clients.splice(clients.indexOf(client), 1);
         console.log(`Client ${client.id} disconnected`);
     });
+
+    client.on("chat_message", (msg) => {
+        console.log('msg:'+msg);
+        for(const client of clients){
+            client.emit('server_message', msg);
+        }
+    });
 });
 
 httpServer.listen(PORT, function(){
